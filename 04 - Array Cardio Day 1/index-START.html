@@ -37,30 +37,57 @@
     ];
     
     // Array.prototype.filter()
+    const fifteen = inventors.filter((inventor) => (inventor.year >= 1500 && inventor.year < 1600));
+    console.table(fifteen);
     // 1. Filter the list of inventors for those who were born in the 1500's
 
     // Array.prototype.map()
+    const namesList = inventors.map((inventor) => {return (inventor.first + " " +inventor.last)});
+    console.table(namesList);
     // 2. Give us an array of the inventors first and last names
 
     // Array.prototype.sort()
+    const birthList = inventors.sort((a, b) => (a.year - b.year));
+    console.table(birthList);
     // 3. Sort the inventors by birthdate, oldest to youngest
 
     // Array.prototype.reduce()
+    const liveList = inventors.reduce((life, inventor) => (life + (inventor.passed - inventor.year)), 0);
+    console.log("they live all together : " + liveList);
     // 4. How many years did all the inventors live all together?
 
     // 5. Sort the inventors by years lived
+    const lifeList = inventors.sort((a, b) => ((a.passed - a.year) - (b.passed - b.year)));
+    console.table(lifeList);
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
-
     // 7. sort Exercise
+    const peopleByFirstName = people.sort((a, b) => (a.substr(a.indexOf(", ") + ", ".length).localeCompare(b.substr(b.indexOf(", ") + ", ".length))));
+    const peopleByLastName  = people.sort((a, b) => (a.substr(0, a.indexOf(", ") + 1).localeCompare(b.substr(0, b.indexOf(", ") + 1))));
+    const peopleByLastName_ = people.sort((a, b) => {
+      const [aFirst, aLast] = a.split(", ");
+      const [bFirst, bLast] = b.split(", ");
+  
+      return (aFirst.localeCompare(bFirst));
+    });
+
+    // console.table(peopleByFirstName);
+    // console.table(peopleByLastName);
+    console.table(peopleByLastName_);
     // Sort the people alphabetically by last name
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
 
+    const words = data.reduce((obj, word) => {
+      obj[word] = data.filter((elem) => elem === word).length;
+      return (obj)
+    }, {});
+
+    console.table(words);
   </script>
 </body>
 </html>
